@@ -28,7 +28,7 @@ inputs:
     description: >
       The regular expression pattern that PR labels will be tested on to decide whether the PR should be backported and where.
       The backport PR's base branch will be extracted from the pattern's required `base` named capturing group.
-    default: "^backport: (?<base>([^ ]+))$"
+    default: "^bp: (?<base>(?!not needed$)[^ ]+)$"
   labels_template:
     description: >
       Lodash template compiling to a JSON array of labels to add to the backport PR.
