@@ -1,5 +1,5 @@
 name: Backporting
-author: Thibault Derousseaux <tibdex@gmail.com>
+author: Dean Kuhne
 description: >
   Automatically backport PRs to other branches by simply labeling them.
 inputs:
@@ -23,12 +23,12 @@ inputs:
       The data properties are:
         - base: backport PR's base branch
         - number: original PR's number
-    default: "backport-<%= number %>-to-<%= base %>"
+    default: "backport/<%= base %>/PR-<%= number %>"
   label_pattern:
     description: >
       The regular expression pattern that PR labels will be tested on to decide whether the PR should be backported and where.
       The backport PR's base branch will be extracted from the pattern's required `base` named capturing group.
-    default: "^backport (?<base>([^ ]+))$"
+    default: "^backport: (?<base>([^ ]+))$"
   labels_template:
     description: >
       Lodash template compiling to a JSON array of labels to add to the backport PR.
@@ -45,7 +45,7 @@ inputs:
         - base: backport PR's base branch
         - number: original PR's number
         - title: original PR's title
-    default: "[Backport <%= base %>] <%= title %>"
+    default: "[Backport of <%= base %>] to <%= title %>"
 outputs:
   created_pull_requests:
     description: A JSON stringified object mapping the base branch of the created pull requests to their number.
