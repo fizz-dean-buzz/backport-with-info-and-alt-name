@@ -1,5 +1,5 @@
 name: Backporting
-author: Thibault Derousseaux <tibdex@gmail.com>
+author: Dean Kuhne
 description: >
   Automatically backport PRs to other branches by simply labeling them.
 inputs:
@@ -28,7 +28,7 @@ inputs:
     description: >
       The regular expression pattern that PR labels will be tested on to decide whether the PR should be backported and where.
       The backport PR's base branch will be extracted from the pattern's required `base` named capturing group.
-    default: "^backport (?<base>([^ ]+))$"
+    default: "^backport: (?<base>([^ ]+))$"
   labels_template:
     description: >
       Lodash template compiling to a JSON array of labels to add to the backport PR.
