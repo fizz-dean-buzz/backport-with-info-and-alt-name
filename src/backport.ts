@@ -192,6 +192,7 @@ const backport = async ({
       body: string;
       mergeCommitSha: string;
       number: number;
+      title: string;
     }>,
   ) => string;
   getHead: (
@@ -268,11 +269,13 @@ const backport = async ({
   const createdPullRequestBaseBranchToNumber: { [base: string]: number } = {};
 
   for (const base of baseBranches) {
+    const title = getTitle({ base, number, title: originalTitle });
     const body = getBody({
       base,
       body: originalBody ?? "",
       mergeCommitSha,
       number,
+      title,
     });
     const head = getHead({ base, number });
     const labels = getLabels({
@@ -281,7 +284,6 @@ const backport = async ({
         .map(({ name }) => name)
         .filter((label) => !labelRegExp.test(label)),
     });
-    const title = getTitle({ base, number, title: originalTitle });
 
     // PRs are handled sequentially to avoid breaking GitHub's log grouping feature.
     // eslint-disable-next-line no-await-in-loop
