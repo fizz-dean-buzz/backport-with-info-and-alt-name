@@ -21,6 +21,6 @@ jobs:
         )
       )
     steps:
-      - uses: fizz-dean-buzz/backport-with-info-and-alt-name@v2.2.5
+      - uses: fizz-dean-buzz/backport-with-info-and-alt-name@v2.3.0
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
