@@ -192,6 +192,7 @@ const backport = async ({
       body: string;
       mergeCommitSha: string;
       number: number;
+	  title: string;
     }>,
   ) => string;
   getHead: (
