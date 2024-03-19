@@ -12,7 +12,8 @@ inputs:
         - body: original PR's body
         - mergeCommitSha: SHA of the original PR's merge commit
         - number: original PR's number
-    default: "--- Automatic Backport of PR #<%= number %>. --- \n <%= body %>"
+        - title: original PR's title
+    default: "--- Automatic Backport of PR #<%= number %>. --- \n <%= title %> \n <%= body %>"
   github_token:
     description: Token for the GitHub API.
     required: true
