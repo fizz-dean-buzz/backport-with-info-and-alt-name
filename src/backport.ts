@@ -267,6 +267,8 @@ const backport = async ({
   await exec("git", ["config", "--global", "user.name", "github-actions[bot]"]);
 
   const createdPullRequestBaseBranchToNumber: { [base: string]: number } = {};
+    
+  const title = getTitle({ base, number, title: originalTitle });
 
   for (const base of baseBranches) {
     const body = getBody({
@@ -283,7 +285,6 @@ const backport = async ({
         .map(({ name }) => name)
         .filter((label) => !labelRegExp.test(label)),
     });
-    const title = getTitle({ base, number, title: originalTitle });
 
     // PRs are handled sequentially to avoid breaking GitHub's log grouping feature.
     // eslint-disable-next-line no-await-in-loop
