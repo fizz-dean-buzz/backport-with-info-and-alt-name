@@ -17,10 +17,10 @@ jobs:
         github.event.action == 'closed'
         || (
           github.event.action == 'labeled'
-          && contains(github.event.label.name, 'backport:')
+          && contains(github.event.label.name, 'bp:')
         )
       )
     steps:
-      - uses: tibdex/backport@v2
+      - uses: fizz-dean-buzz/backport-with-info-and-alt-name@v2.2.5
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
