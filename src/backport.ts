@@ -274,6 +274,7 @@ const backport = async ({
       body: originalBody ?? "",
       mergeCommitSha,
       number,
+	  title
     });
     const head = getHead({ base, number });
     const labels = getLabels({
