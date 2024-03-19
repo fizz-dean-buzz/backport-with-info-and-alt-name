@@ -267,10 +267,11 @@ const backport = async ({
   await exec("git", ["config", "--global", "user.name", "github-actions[bot]"]);
 
   const createdPullRequestBaseBranchToNumber: { [base: string]: number } = {};
-    
-  const title = getTitle({ base, number, title: originalTitle });
 
   for (const base of baseBranches) {
+  
+    const title = getTitle({ base, number, title: originalTitle });
+
     const body = getBody({
       base,
       body: originalBody ?? "",
