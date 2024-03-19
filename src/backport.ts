@@ -192,7 +192,7 @@ const backport = async ({
       body: string;
       mergeCommitSha: string;
       number: number;
-	  title: string;
+      title: string;
     }>,
   ) => string;
   getHead: (
@@ -269,15 +269,13 @@ const backport = async ({
   const createdPullRequestBaseBranchToNumber: { [base: string]: number } = {};
 
   for (const base of baseBranches) {
-  
     const title = getTitle({ base, number, title: originalTitle });
-
     const body = getBody({
       base,
       body: originalBody ?? "",
       mergeCommitSha,
       number,
-	  title
+      title
     });
     const head = getHead({ base, number });
     const labels = getLabels({
