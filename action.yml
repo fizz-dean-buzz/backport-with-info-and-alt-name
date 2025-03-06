@@ -46,7 +46,7 @@ inputs:
         - base: backport PR's base branch
         - number: original PR's number
         - title: original PR's title
-    default: "[Backport] PR #<%= number %> to <%= base %> (<%= title %>)"
+    default: "backport: PR #<%= number %> to <%= base %> (<%= title %>)"
 outputs:
   created_pull_requests:
     description: A JSON stringified object mapping the base branch of the created pull requests to their number.
