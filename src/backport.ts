@@ -226,6 +226,7 @@ const backport = async ({
       merged,
       number,
       title: originalTitle,
+      assignees: originalAssignees = [],
     },
     repository: {
       name: repo,
@@ -268,6 +269,8 @@ const backport = async ({
 
   const createdPullRequestBaseBranchToNumber: { [base: string]: number } = {};
 
+  const assigneeUsernames = originalAssignees.map((a) => a.login).filter(Boolean);
+
   for (const base of baseBranches) {
     const title = getTitle({ base, number, title: originalTitle });
     const body = getBody({
@@ -301,6 +304,19 @@ const backport = async ({
           title,
         });
         createdPullRequestBaseBranchToNumber[base] = backportPullRequestNumber;
+
+        // Assign the same people as the original PR
+        if (assigneeUsernames.length > 0) {
+          await github.request(
+            "POST /repos/{owner}/{repo}/issues/{issue_number}/assignees",
+            {
+              owner,
+              repo,
+              issue_number: backportPullRequestNumber,
+              assignees: assigneeUsernames,
+            },
+          );
+        }
       } catch (_error: unknown) {
         const error = ensureError(_error);
         logError(error);
